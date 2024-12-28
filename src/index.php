@@ -28,7 +28,6 @@
         // Update hostapd.conf and restart service
 
         $output = shell_exec('/root/update_hostapd.sh '.$wifi.' '.$password);
-        print_r($output);
         // $output = shell_exec('service hostapd restart');
     }
 
