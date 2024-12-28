@@ -79,10 +79,10 @@
               <div class="text-center">
                 <div class="col-12">
                   <div>
-                    <button type="button" class="btn btn-primary me-3" data-toggle="modal" data-target="#addBank">
+                    <button type="button" class="btn btn-primary me-3" onclick="location.reload();">
                       Refresh List
                     </button>
-                    <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#addCard">
+                    <button type="submit" class="btn btn-success">
                       Save Settings
                     </button>
                   </div>
