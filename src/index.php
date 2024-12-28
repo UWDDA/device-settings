@@ -14,18 +14,35 @@
 
 <body>
   <?php
-  $output = shell_exec('nmcli dev wifi list');
+    // Check if the form is submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Capture the POST values
+        $wifi = htmlspecialchars($_POST['wifi'] ?? '');
+        $password = htmlspecialchars($_POST['password'] ?? '');
 
-  // Parse the output for SSIDs
-  $lines = explode("\n", $output);
-  $ssids = [];
+        // Display the captured values
+        echo "<h2>Settings Saved!</h2>";
+        echo "wifi: $wifi<br>";
+        echo "pass: $password<br>";
 
-  foreach ($lines as $line) {
-      if (preg_match('/^ *(\S+)\s+(\S+)\s+(\S+)/', $line, $matches)) {
-          if(in_array($matches[2],["--","BSSID"])){ continue; }
-          $ssids[] = $matches[2];
-      }
-  }
+        // Update hostapd.conf and restart service
+
+        $output = shell_exec('/root/update_hostapd.sh '.$wifi.' '.$password);
+        // $output = shell_exec('service hostapd restart');
+    }
+
+    $output = shell_exec('nmcli dev wifi list');
+
+    // Parse the output for SSIDs
+    $lines = explode("\n", $output);
+    $ssids = [];
+
+    foreach ($lines as $line) {
+        if (preg_match('/^ *(\S+)\s+(\S+)\s+(\S+)/', $line, $matches)) {
+            if(in_array($matches[2],["--","BSSID"]) || in_array($matches[2],$ssids)){ continue; }
+            $ssids[] = $matches[2];
+        }
+    }
   ?>
   <div id="preloader"><i>.</i><i>.</i><i>.</i></div>
 
@@ -35,7 +52,7 @@
         <div class="row justify-content-center h-100 align-items-center">
           <div class="col-xl-5 col-md-6">
             <div class="mini-logo text-center my-4">
-              <a href="./intro.html"><img src="./images/logo.png" alt="" /></a>
+              <?php // <a href="./intro.html"><img src="./images/logo.png" alt="" /></a> ?>
               <h4 class="card-title mt-3">WIFI Settings</h4>
             </div>
             <div class="auth-form card">
