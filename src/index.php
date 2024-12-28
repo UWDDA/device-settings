@@ -57,7 +57,7 @@
             </div>
             <div class="auth-form card">
               <div class="card-body">
-                <form class="signin_validate row g-3" action="otp-2.html">
+                <form class="signin_validate row g-3" action="" method="post">
                   <div class="col-12">
 
                     <div class="col-12">
@@ -82,7 +82,7 @@
                     <button type="button" class="btn btn-primary me-3" data-toggle="modal" data-target="#addBank">
                       Refresh List
                     </button>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCard">
+                    <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#addCard">
                       Save Settings
                     </button>
                   </div>
