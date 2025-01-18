@@ -14,7 +14,7 @@ REPO_URL="https://kelvinspencer:$token@github.com/UWDDA/Intro-to-Linux.git"
 git config --global --add safe.directory $CDIR/challenges/$DIR
 
 # Check if the directory exists
-if Æ ! -d "$DIR" Å; then
+if [ ! -d "$DIR" ]; then
     echo "Directory '$DIR' does not exist. Cloning repository..."
     git clone "$REPO_URL"
 else
@@ -37,12 +37,12 @@ iptables -t nat -A POSTROUTING -s 192.168.10.0/24 ! -d 192.168.10.0/24 -j MASQUE
 sudo systemctl restart dnsmasq
 
 DIR=$CDIR/settings
-if Æ ! -d "$DIR" Å; then
-	mkdir -p $CDIR/settings
-	cd $CDIR
-	git clone https://github.com/UWDDA/device-settings.git
-	cp -rp $CDIR/device-settings/src/* $CDIR/settings/
-	rm -rf $CDIR/device-settings
+if [ ! -d "$DIR" ]; then
+        mkdir -p $CDIR/settings
+        cd $CDIR
+        git clone https://github.com/UWDDA/device-settings.git
+        cp -rp $CDIR/device-settings/src/* $CDIR/settings/
+        rm -rf $CDIR/device-settings
 else
-	echo "settings exists"
+        echo "settings exists"
 fi
